@@ -155,3 +155,21 @@ Task 7 step 1
 
 
 Clean up to avoid charges 
+
+
+
+Reflection Questions 
+
+1. The management of an application using only Docker would rely heavily on manual Docker commands. The user would need to manually configure ports, environment variables, and container networking. As the number of containers increases, several challenges arise, including manual scaling and ongoing maintenance of containers. If a container crashes, it must be restarted manually, since Docker alone does not provide automatic recovery or self-healing. This approach becomes increasingly difficult to manage as the application grows in size and complexity.
+
+
+2. A Pod is the smallest unit that can be deployed and managed in Kubernetes. Kubernetes treats Pods as the smallest unit because they allow related containers to be grouped together and managed as a single cohesive unit rather than individually. Containers are too low-level to be managed directly at scale, so Pods act as a bridge that provides shared networking, storage, and lifecycle management. This abstraction makes applications easier to deploy, scale, and maintain.
+
+3. Services are needed in Kubernetes because Pods are temporary and their IP addresses can change, which means connections would constantly break. A Service provides stability by offering a consistent network endpoint that routes traffic to the correct Pods, even as Pods are created, destroyed, or replaced. This allows applications and microservices to communicate reliably without depending on changing Pod IP addresses.
+
+4. DNS-based service discovery in Kubernetes automatically creates DNS records for each Service. This allows Pods to use a Service’s DNS name to communicate with it instead of relying on Pod IP addresses. Because Pod IPs can change, using DNS ensures stable and reliable communication. Service discovery is considered a core requirement for Microservices Architecture because microservices are designed to be loosely coupled, independently deployed, and dynamically scaled. In such an environment, service instances are constantly changing, making hard-coding network locations impractical.
+
+5.Applications should be run through multiple containerized services managed by Kubernetes. Kubernetes allows applications to scale easily by running multiple replicas of individual services instead of scaling the entire system at once. This makes better use of resources and supports growing workloads. In a single-machine system, a failure can take down the entire application, while Kubernetes isolates failures to individual services or Pods. 
+
+
+
