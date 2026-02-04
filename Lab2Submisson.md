@@ -171,5 +171,9 @@ Reflection Questions
 
 5.Applications should be run through multiple containerized services managed by Kubernetes. Kubernetes allows applications to scale easily by running multiple replicas of individual services instead of scaling the entire system at once. This makes better use of resources and supports growing workloads. In a single-machine system, a failure can take down the entire application, while Kubernetes isolates failures to individual services or Pods. 
 
+Diagram
+
+<img width="788" height="589" alt="image" src="https://github.com/user-attachments/assets/3c60b018-f750-4a13-be29-0b00bfed3d63" />
+
 
 
