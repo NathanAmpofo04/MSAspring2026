@@ -261,7 +261,7 @@ Task 8
 2. Kubernetes Services provide stable access to Pods by giving them a consistent name and IP, so clients don’t need to know individual Pod IPs. Labels on Pods allow the Service’s selector to route traffic accurately to the correct set of Pods. Without Services, scaling or replacing Pods would become fragile and error-prone, as clients would have to track changing Pod IPs manually.
 3. An EndpointSlice keeps track of the Pod IPs and ports for a Service. It connects the Service to the right Pods so traffic goes to the correct place. In the lab, I saw that Pod IPs changed when Pods were deleted, the Service ClusterIP stayed the same, and the EndpointSlice updated with the new Pod IPs, which makes sure the Service always points to the right Pods.
 
-Diagran
+Diagram
 
 <img width="459" height="597" alt="image" src="https://github.com/user-attachments/assets/a8a5e2ce-5c93-4431-8d20-3227465c900a" />
 
