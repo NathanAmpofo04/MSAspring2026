@@ -319,7 +319,21 @@ Task 6 step 10
 
 This command removes green 
 
+Task 7 Reflection questions 
 
+1. A dark launch is used to test a new service without interfering with active users or causing failures. It involves deploying the new version into the production environment while preventing real users from accessing it.
+Dark launches differ from canary deployments because, in a canary deployment, a small number of real users receive the update for testing. If everything is functioning properly, the number of users can gradually increase. In contrast, a dark launch does not expose any real users to the new version. A dark launch gives developers the opportunity to test their new service in a live environment without disrupting current users. Some risks of using a dark launch include increased infrastructure costs from operating two services at the same time. Additionally, maintaining two versions simultaneously can create extra work and complexity for developers.
+Developers may choose to use a dark launch to achieve more accurate testing and debugging in a real production environment before exposing the release to customers.
+
+
+2. Downtime in a rolling deployment can still occur if Pods are marked as ready too early by Kubernetes. Downtime may also happen if the cluster does not have enough CPU or memory resources to handle both the old and new Pods running at the same time.
+Old and new versions must maintain backward compatibility, meaning they must be able to run features from older versions of the service and operate safely while both versions are active. Rolling updates are best used for web applications because downtime may result in a loss of users.
+
+3.  In a canary deployment, limiting traffic reduces risk because only a small number of users are affected if there is a bug in the new version. A canary release is also ideal for debugging because developers can catch issues early and fix them before exposing the update to all users. Canary deployment requires intense monitoring to detect bugs in the system as soon as possible. It also requires an efficient error reporting system. However, some bugs may take time to appear, and in this environment it may be difficult to catch them. For example, a bug related to the number of active users may not appear in a small user environment.
+
+4.Blue-green deployment allows instant rollbacks because both environments exist at the same time, and traffic routing is reversible. Costs may increase because two full services are running simultaneously. A hard cutover may be the safer choice when the old and new versions cannot run at the same time or when the database is not backward compatible. Blue-green deployment is often used for database changes because it isolates major structural changes from live traffic until the updates are fully ready.
+
+5.A/B testing is a method used to compare two different versions of a feature, design, or experience by showing each version to different groups of users and measuring their behavior. The goal is to determine which version performs better based on specific metrics such as user engagement, conversions, or interaction patterns. A/B testing is not typically used to deploy bug fixes or infrastructure upgrades because its purpose is not to ensure system stability or correctness, but rather to evaluate user response and business impact. Bug fixes and infrastructure changes focus on reliability and performance, while A/B testing focuses on measuring user behavior. A/B testing is appropriate when teams want to evaluate changes related to user experience, feature variations, layout adjustments, recommendation algorithms, or other product decisions where data-driven feedback helps determine which version produces better results.
 Task 8 clean up
 
 <img width="900" height="162" alt="image" src="https://github.com/user-attachments/assets/49d09345-9fbc-414f-ae5a-342d24771689" />
