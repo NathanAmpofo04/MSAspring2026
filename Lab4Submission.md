@@ -338,5 +338,13 @@ Task 8 clean up
 
 <img width="900" height="162" alt="image" src="https://github.com/user-attachments/assets/49d09345-9fbc-414f-ae5a-342d24771689" />
 
+Diagrams 
 
+Rolling update- <img width="784" height="582" alt="image" src="https://github.com/user-attachments/assets/401a3285-638e-471c-b282-da6067da0542" />
+
+Canary Deployment- <img width="769" height="742" alt="image" src="https://github.com/user-attachments/assets/9889684a-b40b-4400-933f-f260fae120a4" />
+
+Blue Green Deployment - <img width="780" height="749" alt="image" src="https://github.com/user-attachments/assets/d6342c97-70e0-4a21-83d9-9f2a8a255f99" />
+
+ Dark Launch - <img width="778" height="733" alt="image" src="https://github.com/user-attachments/assets/2af635fc-be40-4fba-937d-d99d8f3e4c63" />
 
