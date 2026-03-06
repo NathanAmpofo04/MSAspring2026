@@ -237,3 +237,50 @@ Task 8
 <img width="933" height="124" alt="image" src="https://github.com/user-attachments/assets/2bb277e8-992f-4953-9972-19b5fd623935" />
 
 This is the cleanup for the lab 
+
+
+Reflection questions 
+
+1. Unit conversion is genuinely stateless because the system does not need information from previous conversions to complete a new one. The server can handle a great number of requests and shut down without losing data. Unit conversion works well with Cloud Run because it does not depend on stored state. It can start and process a request without affecting correctness. A service that would not be well equipped for this model is a multiplayer game server because it maintains active connections or stored session data.
+
+2. Public REST is defined by HTTP methods, endpoints, and documentation. The gRPC interface is defined by protocol buffers, binary communication, and strongly typed contracts for multiple languages. Public REST is meant for clients who are building web applications or mobile apps because it is easy to use, works directly in browsers, and is supported by almost every programming language. The gRPC interface is typically used by backend infrastructure and internal service-to-service communication because it provides faster communication and efficient binary data transfer. These services are separated because it provides performance optimization between external users and internal services.
+
+3. The validation is performed in the API layer because it prevents unnecessary computation, protects internal services, and improves performance. Responsibilities should have clear, focused tasks, much like the Single Responsibility Principle.
+
+4. The Converter API proves to the Conversion Engine that it is allowed to call it by using an identity token. The identity token represents proof of which service is making the request. It shows that the request is coming from the Converter API and not from an unknown or unauthorized service.
+
+The audience field in the token specifies which service the token is meant for. This means the token can only be used to call the Conversion Engine and cannot be reused for other services.
+
+Before forwarding the request, Cloud Run checks the identity token to make sure it is valid and that the service making the request has permission to call the Conversion Engine. It also verifies that the audience field matches the service being called.
+
+This model is considered **zero-trust** because no service is automatically trusted, even if it is inside the same system. Every request must prove its identity and permissions before it is allowed to communicate with another service.
+
+5.A cold start is when a serverless service has no running instances and must start a new container before it can handle a request. This causes the first request to be slower because the system needs time to start the container and load the application.
+
+This system may require two cold starts for the first request because there are two services involved. The Converter API may need to start first, and then when it calls the Conversion Engine, that service may also need to start its own container. Since both services may have scaled down to zero, each one must start before processing the request.
+
+Cloud Run accepts this trade-off because it allows services to scale to zero when they are not being used, which saves computing resources and cost. Instead of keeping containers always running and using resources when there are no requests, Cloud Run only starts them when needed.
+
+6.The .proto file is stored in the repository because it defines the structure of the gRPC service, including the messages and service methods. It acts as the **source of truth** for how services communicate with each other.
+
+The generated _pb2.py files are not stored in the repository because they are automatically created from the .proto file using a code generator. Since they can always be regenerated from the proto file, they do not need to be saved in version control.
+
+This reflects the idea that the proto file is the source of truth because all service definitions and data structures originate from it. If the proto file changes, the generated files can simply be recreated to match the updated definitions.
+
+This approach helps microservices evolve safely over time because developers can update the proto file while maintaining compatibility between services. By regenerating the code from the same proto definition, different services can stay synchronized and communicate correctly even as the system grows.
+
+7.To decide where a new feature belongs, you would look at what the feature is responsible for.
+
+If the feature changes how users interact with the system, it belongs in the public API. The public API handles requests from external clients, validates input, and returns responses. Any change related to how users send requests or receive results would go here.
+
+If the feature changes how the actual conversion or processing is performed, it belongs in the internal engine. The engine is responsible for the core logic and computations, so changes to formulas, calculations, or processing behavior would go there.
+
+If the feature requires new data structures or new methods for services to communicate, it belongs in the service contract. The service contract defines how services talk to each other, often through definitions such as the .proto file. Any change that affects the messages or functions between services would be updated there.
+
+This decision process helps teams extend systems without breaking existing functionality because each part of the system has a clear responsibility. By separating the public interface, the internal logic, and the communication contract, teams can add new features or improve services while keeping the rest of the system stable.
+
+Diagram
+
+<img width="459" height="612" alt="image" src="https://github.com/user-attachments/assets/3f358fb5-edae-416e-8197-8805ddb92448" />
+
+
